@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dynamic Portfolio Builder</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <script>
+        const token = localStorage.getItem('jwt');
+        if (!token) {
+            window.location.href = 'login.html'; 
+        }
+        const JWT_TOKEN = token; 
+    </script>
+    
+    <div class="container">
+        <h1>Dynamic Portfolio Generator</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <p style="margin: 0;">Status: Ready to edit.</p>
+            <button class="secondary-btn" onclick="localStorage.removeItem('jwt'); window.location.href='login.html';">Log Out</button>
+        </div>
+
+        <div id="statusMessage" class="message-box info" style="display: none;"></div>
+
+        <form id="portfolioForm">
+            
+            <div id="portfolio-content-to-print">
+                
+                <section class="section-card">
+                    <h3>1. Personal Information</h3>
+                    <label>Full Name:</label><input type="text" id="fullName" name="fullName"><br>
+                    <label>Contact Info:</label><input type="text" id="contact" name="contact"><br>
+                    <label>Short Bio:</label><textarea id="bio" name="bio"></textarea><br>
+                    <label>Photo (URL/Placeholder):</label><input type="text" id="photoUrl" name="photoUrl" placeholder="Enter image URL">
+                </section>
+
+                <section class="section-card">
+                    <h3>2. Skills (Soft & Technical)</h3>
+                    <div id="skillsContainer" class="input-group" style="flex-wrap: wrap;">
+                        </div>
+                    <div class="input-group">
+                        <input type="text" id="newSkillInput" placeholder="Enter new skill">
+                        <button type="button" onclick="addDynamicItem('skill')">Add</button>
+                    </div>
+                </section>
+
+                <section class="section-card">
+                    <h3>3. Academic Background (Optional)</h3>
+                    <div class="input-row" style="font-weight: bold; border-bottom: 1px solid #ccc; padding-bottom: 5px;">
+                        <span>Institute</span><span>Degree</span><span>Year</span><span></span>
+                    </div>
+                    <div id="academicContainer">
+                        </div>
+                    <button type="button" onclick="addDynamicItem('academic')">Add Academic Entry</button>
+                </section>
+
+                <section class="section-card">
+                    <h3>4. Work Experience</h3>
+                    <div id="workContainer">
+                        </div>
+                    <button type="button" onclick="addDynamicItem('work')">Add Work Experience</button>
+                </section>
+
+                <section class="section-card">
+                    <h3>5. Projects/Publications (Optional)</h3>
+                    <div id="projectsContainer">
+                        </div>
+                    <div class="input-group">
+                        <input type="text" id="newProjectInput" placeholder="Enter new project/publication title">
+                        <button type="button" onclick="addDynamicItem('project')">Add</button>
+                    </div>
+                </section>
+                
+            </div> <div style="margin-top: 25px; display: flex; justify-content: flex-end;">
+                <button type="submit">Save & Update Portfolio</button>
+                <button type="button" onclick="generatePDF()" class="secondary-btn">Generate PDF</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
