@@ -13,16 +13,13 @@ This project is built using:
 
 To run this project locally, follow these steps:
 
-1.  **Clone the repository:**
-    ```bash
-    git clone [Your Repo URL]
-    ```
-2.  **Install dependencies:**
+
+1.  **Install dependencies:**
     ```bash
     npm install 
     # or yarn install
     ```
-3.  **Run in development mode:**
+2.  **Run in development mode:**
     ```bash
     npm run dev
     # The application will be available at http://localhost:[Port]
